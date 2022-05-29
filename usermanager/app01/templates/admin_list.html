@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">中国联通管理系统</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="/admin/list/"> 管理员 </a></li>
+        <li ><a href="/depart/list/"> 部门管理 </a></li>
+        <li><a href="/user/list/">用户管理</a></li>
+          <li><a href="/pretty/list/">靓号管理</a></li>
+          <li><a href="/order/list/">订单管理</a></li>
+          <li><a href="/chart/list/">数据统计</a></li>
+          <li><a href="/upload/form/">Form上传</a></li>
+        <li><a href="/upload/modelform/">ModelForm上传</a></li>
+        <li><a href="/city/list/">城市列表</a></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login/">登录</a></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.session.info.name}} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">个人资料</a></li>
+            <li><a href="#">信息</a></li>
+            <li><a href="/logout/">注销</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</div>
+<div>
+    <div class="container">
+    <div style="margin-bottom: 10px" class="clearfix">
+        <a class="btn btn-success " href="/admin/add/" > 添加管理员 </a>
+    </div>
+        <div style="float: right; width: 300px">
+            <form method="GET">
+        <div class="input-group">
+            <input type="text", class="form-control" placeholder="搜索" name="q" value="{{search_data}}">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+        </div>
+            </form>
+        </div>
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+    <div class="panel-heading">管理员列表</div>
+      <!-- Table -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>用户名</th>
+              <th>密码</th>
+              <th>重置密码</th>
+              <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj in queryset %}
+          <tr>
+              <th>{{obj.id}}</th>
+              <th>{{obj.username}}</th>
+              <th>{{obj.password}}</th>
+              <td>
+                  <a href="/admin/{{ obj.id }}/reset/">重置密码</a>
+              </td>
+            <td>
+                <a class="btn btn-primary btn-xs" href="/admin/{{ obj.id }}/edit/"> 编辑</a>
+                <a class="btn btn-danger btn-xs" href="/admin/{{ obj.id }}/delete/"> 删除</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}

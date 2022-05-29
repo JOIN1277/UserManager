@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <base href="/">
+
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css"></link>
+    <link rel="stylesheet" href="../static/plugins/font-awesome-4.7.0/css/font-awesome.css"></link>
+    <style>
+        .navbar{
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+<div>
+    {% block content %} {% endblock %}
+</div>
+
+{% block js%} {% endblock %}
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="../static/plugins/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
