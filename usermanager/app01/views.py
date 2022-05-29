@@ -419,6 +419,7 @@ class LoginForm(forms.Form):
     ##md5加密
     def clean_password(self):
         pwd = self.cleaned_data.get("password")
+        print(md5(pwd))
         return md5(pwd)
 
 
