@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01 import views,models
+from app01 import models
+from app01.views import depart,user,pretty,admin,login,order,charts,upload,city
 from django.urls import re_path
 from django.views.static import serve
 from django.conf import settings
@@ -27,39 +28,47 @@ urlpatterns = [
     # serve： 以media开头的, 以Django来处理
     re_path(r'^media/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}, name='media'),
 
-    path('depart/list/', views.depart_show),
-    path('depart/add/' ,views.depart_add),
-    path('depart/delete/', views.depart_delete),
-    path('depart/<int:uid>/edit/', views.depart_edit),
-    path('depart/multi/',views.depart_multi),
-    path('user/list/', views.user_show),
-    path('user/add/', views.user_add),
-    path('user/<int:uid>/edit/', views.user_edit),
-    path(r'user/<int:uid>/delete/', views.user_delete),
-    path('pretty/list/', views.pretty_list),
-    path('pretty/add/', views.pretty_add),
-    path('pretty/<int:uid>/edit/', views.pretty_edit),
-    path(r'pretty/<int:uid>/delete/', views.pretty_delete),
-    path('admin/list/',views.admin_list),
-    path('admin/add/',views.admin_add),
-    path('admin/<int:uid>/edit/',views.admin_edit),
-    path('admin/<int:uid>/delete/', views.admin_delete),
-    path('admin/<int:uid>/reset/',views.admin_reset),
-    path('login/',views.admin_login),
-    path('logout/',views.logout),
-    path('image/code/',views.image_code),
+    path('depart/list/', depart.depart_show),
+    path('depart/add/' ,depart.depart_add),
+    path('depart/delete/', depart.depart_delete),
+    path('depart/<int:uid>/edit/', depart.depart_edit),
+    path('depart/multi/',depart.depart_multi),
+
+    path('user/list/', user.user_show),
+    path('user/add/', user.user_add),
+    path('user/<int:uid>/edit/', user.user_edit),
+    path(r'user/<int:uid>/delete/', user.user_delete),
+
+    path('pretty/list/', pretty.pretty_list),
+    path('pretty/add/', pretty.pretty_add),
+    path('pretty/<int:uid>/edit/', pretty.pretty_edit),
+    path(r'pretty/<int:uid>/delete/', pretty.pretty_delete),
+
+    path('admin/list/',admin.admin_list),
+    path('admin/add/',admin.admin_add),
+    path('admin/<int:uid>/edit/',admin.admin_edit),
+    path('admin/<int:uid>/delete/', admin.admin_delete),
+    path('admin/<int:uid>/reset/',admin.admin_reset),
+
+    path('login/',login.admin_login),
+    path('logout/',login.logout),
+    path('image/code/',login.image_code),
+
     #订单管理
-    path('order/list/',views.order_list),
-    path('order/add/',views.order_add),
-    path('order/delete/',views.order_delete),
-    path('order/detail/',views.order_detail),
-    path('order/edit/',views.order_edit),
-    path('chart/list/',views.chart_list),
-    path('chart/bar/',views.chart_bar),
-    path('chart/pie/',views.chart_pie),
-    path('upload/list/',views.upload_list),
-    path('upload/form/',views.upload_form),
-    path('upload/modelform/',views.upload_modelform),
-    path('city/list/',views.city_list),
-    path('city/add/', views.city_add),
+    path('order/list/',order.order_list),
+    path('order/add/',order.order_add),
+    path('order/delete/',order.order_delete),
+    path('order/detail/',order.order_detail),
+    path('order/edit/',order.order_edit),
+
+    path('chart/list/',charts.chart_list),
+    path('chart/bar/',charts.chart_bar),
+    path('chart/pie/',charts.chart_pie),
+
+    path('upload/list/',upload.upload_list),
+    path('upload/form/',upload.upload_form),
+    path('upload/modelform/',upload.upload_modelform),
+
+    path('city/list/',city.city_list),
+    path('city/add/', city.city_add),
 ]
